@@ -1,13 +1,25 @@
 
 import './App.css'
+import Head from "./components/Head"
+import Body from "./components/Body"
 
 function App() {
  
   return (
     <>
-     <h1 className='text-8xl'>hello</h1>
+     <Head/>
+     <Body/>
     </>
   )
 }
 
 export default App
+
+// Head
+// Body 
+//   sidebar
+//     menuitems
+//   main container 
+//     buttonslist
+//     videocontainer
+//       videocards
