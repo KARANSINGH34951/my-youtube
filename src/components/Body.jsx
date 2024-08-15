@@ -1,18 +1,20 @@
+// Import statements
+import Sidebar from "../components/Sidebar";
+import Maincontainer from "./Maincontainer";
+import store from '../utils/store';
 
-import {Provider} from "react-redux"
-import Sidebar from "../components/Sidebar"
-import Maincontainer from "./Maincontainer"
-import store from '../utils/store'
-
+// Body component
 const Body = () => {
   return (
-    <Provider store={store}>
-    <div className='flex'>
-      <Sidebar/>
-      <Maincontainer/>
-    </div>
-    </Provider>
-  )
+    // Provider component wraps the entire application to provide the Redux store
+    
+      <div className='flex'>
+        {/* Sidebar and Maincontainer components are rendered inside a flex container */}
+        <Sidebar />
+        <Maincontainer />
+      </div>
+    
+  );
 }
 
-export default Body
+export default Body;
