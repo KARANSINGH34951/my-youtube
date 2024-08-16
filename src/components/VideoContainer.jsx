@@ -1,8 +1,10 @@
-import React from 'react'
+import Card from "./Card"
 
 const VideoContainer = () => {
   return (
-    <div>VideoContainer</div>
+    <div>
+      <Card/>
+    </div>
   )
 }
 
