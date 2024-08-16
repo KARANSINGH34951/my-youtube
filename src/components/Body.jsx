@@ -2,16 +2,14 @@
 import Sidebar from "../components/Sidebar";
 import Maincontainer from "./Maincontainer";
 import store from '../utils/store';
+import { Outlet } from 'react-router-dom';
 
 // Body component
 const Body = () => {
-  return (
-    // Provider component wraps the entire application to provide the Redux store
-    
-      <div className='flex'>
-        {/* Sidebar and Maincontainer components are rendered inside a flex container */}
+  return (  
+      <div className='flex'> 
         <Sidebar />
-        <Maincontainer />
+        <Outlet/>
       </div>
     
   );
