@@ -1,4 +1,3 @@
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import PersonIcon from '@mui/icons-material/Person';
 import { useDispatch } from 'react-redux';
 import { toggleMenu } from '../utils/appSlice';
