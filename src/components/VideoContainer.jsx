@@ -13,7 +13,7 @@ const VideoContainer = () => {
     const data = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=${import.meta.env.VITE_API_YOUTUBE}`);
     const json = await data.json();
     setvideosdata(json.items);
-    // console.log(json);
+    // console.log(json);s
   }
 
   return (

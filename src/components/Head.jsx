@@ -1,9 +1,28 @@
 import PersonIcon from '@mui/icons-material/Person';
 import { useDispatch } from 'react-redux';
 import { toggleMenu } from '../utils/appSlice';
+import { useEffect, useState } from 'react';
 
 const Head = () => {
+  const [searchquesries,setsearchquesries]=useState("")
   const dispatch = useDispatch();
+ 
+
+  useEffect(()=>{
+    const timer = setTimeout(() => {
+      getsearchsuggestions();
+    }, 200);
+    return ()=>{
+      clearTimeout(timer)
+    }
+  },[searchquesries]);
+
+ const getsearchsuggestions=async ()=>{
+    console.log(searchquesries);
+    const data=await fetch(import.meta.env.VITE_API_YOUTUBESEARCH+searchquesries);
+    const json= await data.json();
+    console.log(json);   
+  };
 
   const togglemenuHandler = () => {
     dispatch(toggleMenu());
@@ -30,6 +49,8 @@ const Head = () => {
           <input
             type="text"
             placeholder="Search"
+            value={searchquesries}
+            onChange={(e)=>setsearchquesries(e.target.value)}
             className='border-2 border-black rounded-l-full w-2/3 p-2'
           />
           <button className='bg-black text-white p-3 rounded-r-full'>
