@@ -2,16 +2,18 @@ import PersonIcon from '@mui/icons-material/Person';
 import { useDispatch } from 'react-redux';
 import { toggleMenu } from '../utils/appSlice';
 import { useEffect, useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
 
 const Head = () => {
   const [searchquesries,setsearchquesries]=useState("")
+  const [suggestions,setsuggestions]=useState([])
   const dispatch = useDispatch();
  
 
   useEffect(()=>{
     const timer = setTimeout(() => {
       getsearchsuggestions();
-    }, 200);
+    }, 300);
     return ()=>{
       clearTimeout(timer)
     }
@@ -21,7 +23,8 @@ const Head = () => {
     console.log(searchquesries);
     const data=await fetch(import.meta.env.VITE_API_YOUTUBESEARCH+searchquesries);
     const json= await data.json();
-    console.log(json);   
+    console.log(json); 
+    setsuggestions(json[1]);  
   };
 
   const togglemenuHandler = () => {
@@ -46,6 +49,7 @@ const Head = () => {
         </div>
 
         <div className='grid-cols-10 px-5'>
+          <div>
           <input
             type="text"
             placeholder="Search"
@@ -56,6 +60,15 @@ const Head = () => {
           <button className='bg-black text-white p-3 rounded-r-full'>
             Search
           </button>
+          </div>
+          <div className='fixed bg-white py-2 px-5 w-auto shadow-lg rounded-lg border border-gray-100'>
+            <ul>
+              {suggestions.map((suggestion)=>(
+                <li key={suggestion} className='py-2 px-3 shadow-sm hover:bg-gray-100'>{suggestion}</li>
+              ))}
+            </ul>
+          </div>
+
         </div>
 
         <div className='h-10 left-9 grid-cols-1 flex justify-end items-end px-4'>
