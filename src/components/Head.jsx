@@ -7,9 +7,10 @@ import SearchIcon from '@mui/icons-material/Search';
 const Head = () => {
   const [searchquesries,setsearchquesries]=useState("")
   const [suggestions,setsuggestions]=useState([])
+  const [showsuggestions,setshowsuggestions]=useState(false)
+
   const dispatch = useDispatch();
  
-
   useEffect(()=>{
     const timer = setTimeout(() => {
       getsearchsuggestions();
@@ -35,8 +36,7 @@ const Head = () => {
     <div>
       <div className="head grid grid-flow-col p-3 m-2 shadow-md">
         <div 
-          className="head__right flex grid-cols-1 " 
-          // Correct invocation of the handler
+          className="head__right flex grid-cols-1 "    
         >
 
           <img className='cursor-pointer h-10 px-4' onClick={togglemenuHandler}  src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1024px-Hamburger_icon.svg.png" alt="" />
@@ -55,20 +55,24 @@ const Head = () => {
             placeholder="Search"
             value={searchquesries}
             onChange={(e)=>setsearchquesries(e.target.value)}
+            onFocus={()=>setshowsuggestions(true)}
+            onBlur={()=>setshowsuggestions(false)}
             className='border-2 border-black rounded-l-full w-2/3 p-2'
           />
           <button className='bg-black text-white p-3 rounded-r-full'>
             Search
           </button>
           </div>
-          <div className='fixed bg-white py-2 px-5 w-auto shadow-lg rounded-lg border border-gray-100'>
+          {
+            showsuggestions &&
+            <div className='fixed bg-white py-2 px-5 w-auto shadow-lg rounded-lg border border-gray-100'>
             <ul>
               {suggestions.map((suggestion)=>(
-                <li key={suggestion} className='py-2 px-3 shadow-sm hover:bg-gray-100'>{suggestion}</li>
+                <li key={suggestion} className='py-2 px-3 shadow-sm hover:bg-gray-100'><SearchIcon/>{suggestion}</li>
               ))}
             </ul>
-          </div>
-
+            </div>
+          }
         </div>
 
         <div className='h-10 left-9 grid-cols-1 flex justify-end items-end px-4'>
